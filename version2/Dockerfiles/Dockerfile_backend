@@ -14,7 +14,7 @@ ENV MAVEN_HOME=/opt/maven
 RUN export MAVEN_HOME
 
 ## Copy backend to container
-COPY ./spring-boot-backend /home/spring-boot-backend
+COPY ../spring-boot-backend /home/spring-boot-backend
 
 ## Package the backend 
 WORKDIR /home/spring-boot-backend
