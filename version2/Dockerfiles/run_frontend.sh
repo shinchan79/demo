@@ -1,0 +1,1 @@
+pm2 --name demo start npm -- start
