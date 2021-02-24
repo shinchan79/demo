@@ -13,13 +13,29 @@ RUN apt-get update && \
 ENV MAVEN_HOME=/opt/maven
 RUN export MAVEN_HOME
 
-## Copy backend to container
-COPY ../spring-boot-backend /home/spring-boot-backend
+# Install MongoDB dependencies
+RUN apt-get update && \
+    apt-get install -y gnupg
 
+## Install wget
+RUN apt-get update && \
+	apt-get install -y wget
+
+## Install mongoDB 
+RUN wget -qO - https://www.mongodb.org/static/pgp/server-4.4.asc | apt-key add -
+RUN echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/4.4 multiverse" | tee /etc/apt/sources.list.d/mongodb-org-4.4.list
+RUN apt-get update && \
+	apt-get install -y mongodb-org
+
+RUN mkdir -p /data/db
+RUN mkdir -p /data/code
+
+## Copy backend to container
+COPY ./spring-boot-backend /home/spring-boot-backend
 ## Package the backend 
 WORKDIR /home/spring-boot-backend
-RUN mvn package
+RUN  mongod --fork --logpath /var/log/mongodb/mongod.log && mvn package
 
 ## Run jar file 
-ENTRYPOINT ["java -jar /home/spring-boot-backend/target/todoapp-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["mongod --fork --logpath /var/log/mongodb/mongod.log && java -Dspring.data.mongodb.uri=mongodb://localhost:27017/todoapp -jar /home/spring-boot-backend/target/todoapp-0.0.1-SNAPSHOT.jar"]
 EXPOSE 8081
