@@ -1,0 +1,3 @@
+FROM mongo
+ENTRYPOINT ["mongod --fork --logpath /var/log/mongodb/mongod.log"]
+EXPOSE 27017
