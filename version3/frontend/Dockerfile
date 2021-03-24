@@ -13,5 +13,5 @@ COPY ./run_frontend.sh ./run_frontend.sh
 RUN chmod +x ./run_frontend.sh
 
 EXPOSE 4200
-ENTRYPOINT ["./run_frontend.sh"]
+ENTRYPOINT ["sh","run_frontend.sh"]
 

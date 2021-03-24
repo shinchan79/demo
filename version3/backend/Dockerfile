@@ -42,5 +42,7 @@ RUN chmod +x ./run_backend.sh
 
 EXPOSE 8081
 ## Run jar file 
-ENTRYPOINT ["./run_backend.sh"]
+ENTRYPOINT ["sh","run_backend.sh"]
+
+
 
