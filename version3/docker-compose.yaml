@@ -4,11 +4,14 @@ services:
     build:
       context: ./backend
     volumes:
+      - static:/home
   frontend:
     build:
       context: ./frontend
     volumes:
+      - static:/home
     ports:
       - "4200:4200"
 volumes:
+  - static
 
