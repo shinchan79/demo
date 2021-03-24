@@ -1,0 +1,14 @@
+version : "3"
+services:
+  backend:
+    build:
+      context: ./backend
+    volumes:
+  frontend:
+    build:
+      context: ./frontend
+    volumes:
+    ports:
+      - "4200:4200"
+volumes:
+
