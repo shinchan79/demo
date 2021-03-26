@@ -38,7 +38,7 @@ RUN  mongod --fork --logpath /var/log/mongodb/mongod.log && mvn package
 
 ## Copy run config file to container and grant execute permission
 COPY ./run_backend.sh /home/run_backend.sh
-RUN chmod +x home/run_backend.sh
+RUN chmod +x /home/run_backend.sh
 
 EXPOSE 8081
 ## Run jar file 

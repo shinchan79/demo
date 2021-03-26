@@ -10,7 +10,7 @@ RUN npm install
 
 ## Copy run config file to container and grant execute permission
 COPY ./run_frontend.sh /home/run_frontend.sh
-RUN chmod +x home/run_frontend.sh
+RUN chmod +x /home/run_frontend.sh
 
 EXPOSE 4200
 ENTRYPOINT ["/home/run_frontend.sh"]
